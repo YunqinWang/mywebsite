@@ -1,0 +1,30 @@
+{
+	"name": "mywebsite",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/YunqinWang/mywebsite.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/YunqinWang/mywebsite/issues"
+	},
+	"homepage": "https://github.com/YunqinWang/mywebsite#readme",
+	"devDependencies": {
+		"css-loader": "^7.1.2",
+		"style-loader": "^4.0.0",
+		"webpack": "^5.99.7",
+		"webpack-cli": "^6.0.1"
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
+	}
+}
