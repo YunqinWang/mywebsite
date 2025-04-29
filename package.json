@@ -19,7 +19,10 @@
 	},
 	"homepage": "https://github.com/YunqinWang/mywebsite#readme",
 	"devDependencies": {
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.0",
 		"@mui/material": "^7.0.2",
+		"@types/d3": "^7.4.3",
 		"@types/lodash": "^4.17.16",
 		"@types/react": "^19.1.2",
 		"@types/react-dom": "^19.1.2",
@@ -33,6 +36,7 @@
 		"webpack-cli": "^6.0.1"
 	},
 	"dependencies": {
+		"d3": "^7.9.0",
 		"lodash": "^4.17.21"
 	}
 }
