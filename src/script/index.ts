@@ -1,4 +1,4 @@
-import "../style/theme.css";
+import "../style/main.css";
 import { ReactBase } from "./react_base";
 import { HomePage } from "./react/home";
 

@@ -1,0 +1,21 @@
+@font-face {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 100 900; /* Variable font weight range */
+	src: url("../font/Inter-VariableFont_opsz\,wght.ttf") format("truetype");
+}
+@font-face {
+	font-family: "Inter";
+	font-style: italic;
+	font-weight: 100 900;
+	src: url("../font/Inter-Italic-VariableFont_opsz\,wght.ttf")
+		format("truetype");
+}
+
+p {
+	font-family: "Inter";
+}
+
+body {
+	margin: 0;
+}
