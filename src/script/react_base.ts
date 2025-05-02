@@ -24,4 +24,17 @@ export class ReactBase {
 		const e = React.createElement;
 		this.root.render(e(component, componentArg));
 	}
+
+	renderFooter(
+		component: (arg: any) => React.JSX.Element,
+		componentArg: any
+	) {
+		let footerContainer = document.getElementsByTagName(
+			"footer"
+		)[0] as HTMLDivElement;
+		let root = ReactDOM.createRoot(footerContainer);
+		const e = React.createElement;
+
+		root.render(e(component, componentArg));
+	}
 }

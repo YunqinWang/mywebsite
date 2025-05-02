@@ -7,6 +7,7 @@ import { theme } from "../style/theme";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import * as d3 from "d3";
 import React from "react";
+import Icon from "../../image/map.png";
 
 function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 	let svgChart = d3.select(`svg#${svgId}`);
@@ -18,6 +19,48 @@ function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 		return `translate(${start + t * (end - start)} 0)`;
 	};
 
+	let largeR = boxSize.width * 0.37;
+	let largeCircleG = mainG.append("g");
+
+	largeCircleG
+		.append("circle")
+		.attr("fill", "#0004FF")
+		.attr("stroke-width", 0)
+		.attr("cy", -largeR * 0.45)
+		.attr("r", largeR)
+		.style("opacity", 0.15)
+		.style("filter", "drop-shadow(25px 4px 20px rgb(220, 220, 220))");
+
+	largeCircleG
+		.transition()
+		.duration(3000)
+		.ease(d3.easeElasticOut.period(0.3))
+		.attrTween("transform", () => {
+			const start = boxSize.width + largeR;
+			const end = largeR * 1.62;
+			return function (t) {
+				return movein(t, start, end);
+			};
+		});
+
+	largeCircleG
+		.append("image")
+		.attr("xlink:href", Icon)
+		.attr("x", -largeR)
+		.attr("y", -largeR * 2)
+		.attr("width", largeR * 2)
+		.attr("height", largeR * 3)
+		.attr("clip-path", "url(#circle-clip)")
+		.attr("opacity", 0.7);
+	svgChart
+		.append("defs")
+		.append("clipPath")
+		.attr("id", "circle-clip")
+		.append("circle")
+		.attr("r", largeR)
+		.attr("cx", 0)
+		.attr("cy", -largeR * 0.45); // match group center
+
 	let smallR = boxSize.width * 0.28;
 	let smallCircleG = mainG.append("g");
 
@@ -27,8 +70,8 @@ function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 		.attr("stroke-width", 0)
 		.attr("cy", -smallR * 0.1)
 		.attr("r", smallR)
-		.style("opacity", 0.3)
-		.style("filter", "drop-shadow(20px 4px 20px rgb(61, 30, 0))");
+		.style("opacity", 0.4)
+		.style("filter", "drop-shadow(20px 4px 20px rgb(255, 255, 255))");
 
 	smallCircleG
 		.append("text")
@@ -49,31 +92,6 @@ function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 				return movein(t, start, end);
 			};
 		});
-
-	let largeR = boxSize.width * 0.37;
-	let largeCircleG = mainG.append("g");
-
-	largeCircleG
-		.append("circle")
-		.attr("fill", "#0004FF")
-		.attr("stroke-width", 0)
-		.attr("cy", -largeR * 0.45)
-		.attr("r", largeR)
-		.style("opacity", 0.2)
-		.style("filter", "drop-shadow(25px 4px 20px rgb(8, 5, 47))");
-
-	largeCircleG
-		.transition()
-		.duration(3000)
-		.ease(d3.easeElasticOut.period(0.3))
-		.attrTween("transform", () => {
-			const start = boxSize.width + largeR;
-			const end = largeR * 1.62;
-			return function (t) {
-				return movein(t, start, end);
-			};
-		});
-
 	const beam = smallCircleG
 		.append("polygon")
 		.attr(
@@ -193,6 +211,10 @@ export function HomePage() {
 						<NavMenuItem title="My Life" />
 					</Grid>
 				</Grid>
+			</Box>
+
+			<Box>
+				<h3>Hello!</h3>
 			</Box>
 		</ThemeProvider>
 	);

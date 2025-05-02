@@ -33,7 +33,19 @@ module.exports = {
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,
 				type: "asset/resource",
 			},
-			,
+			// {
+			// 	test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+			// 	use: [
+			// 		{
+			// 			loader: "file-loader",
+			// 			options: {
+			// 				outputPath: `./image`,
+			// 				publicPath: "/image",
+			// 				name: `[contenthash].[name].[ext]`,
+			// 			},
+			// 		},
+			// 	],
+			// },
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				type: "asset/resource",
