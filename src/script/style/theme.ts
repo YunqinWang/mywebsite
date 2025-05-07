@@ -37,7 +37,6 @@ theme = createTheme(theme, {
 			fontSize: 16,
 			fontWeight: 500,
 		},
-
 		h6: {
 			fontSize: 14,
 		},
