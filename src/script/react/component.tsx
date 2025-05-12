@@ -62,9 +62,9 @@ export function MyFooter() {
 								value: "https://www.linkedin.com/in/fiona-yunqin-wang-4343971a4/",
 							},
 						];
-						let items = data.map((d) => {
+						let items = data.map((d, i) => {
 							return (
-								<Grid container spacing={3}>
+								<Grid container spacing={3} key={i}>
 									<Grid size={3}>
 										<Typography
 											variant="body1"
