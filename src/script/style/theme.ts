@@ -27,20 +27,28 @@ theme = createTheme(theme, {
 	},
 	typography: {
 		fontFamily: "Montserrat",
+		h2: {
+			fontSize: 36,
+			fontWeight: 700,
+		},
 		h3: {
-			fontSize: 22,
+			fontSize: 26,
 		},
 		h4: {
-			fontSize: 18,
+			fontSize: 20,
 		},
 		h5: {
-			fontSize: 16,
+			fontSize: 18,
 			fontWeight: 500,
 		},
 		h6: {
-			fontSize: 14,
+			fontSize: 16,
+			fontWeight: 500,
 		},
 		body1: {
+			fontSize: 15,
+		},
+		body2: {
 			fontSize: 12,
 		},
 	},

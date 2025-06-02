@@ -6,9 +6,31 @@ import { theme } from "../style/theme";
 
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import * as d3 from "d3";
-import React from "react";
-import Icon from "../../image/map.png";
+import React, { JSX } from "react";
+import {
+	Icon_map,
+	Icon_ts,
+	Icon_js,
+	Icon_py,
+	Icon_react,
+	Icon_nodejs,
+	Icon_webpack,
+	Icon_d3,
+	Icon_gql,
+	Icon_sass,
+	Icon_csharp,
+	Icon_c,
+	Icon_go,
+	Icon_qgis,
+	Icon_arcgis,
+	Icon_figma,
+	Icon_photoshop,
+	Icon_indesign,
+	Icon_illustrator,
+	Icon_pr,
+} from "../util/icon_loader";
 import _timelineData from "../data/timeline.json";
+import Stack from "@mui/material/Stack";
 
 function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 	let svgChart = d3.select(`svg#${svgId}`);
@@ -46,7 +68,7 @@ function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 
 	largeCircleG
 		.append("image")
-		.attr("xlink:href", Icon)
+		.attr("xlink:href", Icon_map)
 		.attr("x", -largeR)
 		.attr("y", -largeR * 2)
 		.attr("width", largeR * 2)
@@ -145,7 +167,7 @@ function drawTimeline(
 	boxSize: { width: number; height: number }
 ) {
 	let svgChart = d3.select(`svg#${svgId}`);
-	const margins = { s: 150, e: 300, y: 20 };
+	const margins = { s: 50, e: 200, y: 20 };
 	let mainG = svgChart
 		.append("g")
 		.attr("transform", `translate(${margins.s}, ${margins.y + 240})`);
@@ -320,7 +342,7 @@ function drawTimeline(
 		.text((d) => d.event)
 		.attr("fill", (d) => getColorByType(d))
 		.attr("text-anchor", "middle")
-		.style("font-size", "14px");
+		.style("font-size", "15px");
 
 	eventLine
 		.selectAll(".timeline-event-text2")
@@ -335,7 +357,7 @@ function drawTimeline(
 		.text((d) => d.location)
 		.attr("fill", (d) => getColorByType(d))
 		.attr("text-anchor", "middle")
-		.style("font-size", "14px");
+		.style("font-size", "12px");
 }
 
 function NavMenuItem({ title }: { title: string }) {
@@ -354,6 +376,42 @@ function NavMenuItem({ title }: { title: string }) {
 		color: "rgb(218, 218, 218)",
 	}));
 	return <Item>{title}</Item>;
+}
+
+function SkillLogos({
+	logoGroups,
+}: {
+	logoGroups: { img: any; name: string }[];
+}) {
+	let row = logoGroups.map((l) => {
+		return (
+			<div style={{ width: "50px" }}>
+				<div className="w-100 d-flex justify-content-center">
+					<img
+						src={l.img}
+						style={{
+							width: "30px",
+							height: "30px",
+							objectFit: "contain",
+						}}
+					></img>
+				</div>
+				<Typography
+					className="text-center"
+					variant="body2"
+					color={theme.palette.grey[400]}
+				>
+					{l.name}
+				</Typography>
+			</div>
+		);
+	});
+
+	return (
+		<Stack direction="row" spacing={2} className="m-auto mb-4">
+			{row}
+		</Stack>
+	);
 }
 
 export function HomePage() {
@@ -418,13 +476,107 @@ export function HomePage() {
 						<NavMenuItem title="My Projects" />
 					</Grid>
 					<Grid size={4}>
-						<NavMenuItem title="My Life" />
+						<NavMenuItem title="Me in Wild" />
 					</Grid>
 				</Grid>
 			</Box>
 
-			<Box>
-				<h3>Hello!</h3>
+			<Box className="w-75 m-auto">
+				<Box className="my-4">
+					<Typography variant="h2" color={theme.palette.primary.main}>
+						{"Hi :)"}
+					</Typography>
+
+					<Typography variant="body1">
+						<p>Welcome to my webiste! </p>
+						<p>
+							I'm a{" "}
+							<span className="highlight">
+								{" "}
+								frontend developer{" "}
+							</span>
+							with
+							<span className="highlight"> 3 years </span>
+							of experience, specializing in map-centric
+							applications and asset management web platforms.I
+							also have extensive experience developing dashboards
+							driven by data analytics.
+						</p>
+						<p>
+							My core stack includes React, TypeScript,
+							JavaScript, Webpack, and Python with additional
+							experience in D3 library, Node.js, scss, and C#.
+							Beyond frontend work, I also have experience in
+							diverse backend and systems projects — including a
+							MapReduce engine in Go, network programming in C++.
+						</p>
+					</Typography>
+
+					<Box className="d-flex flex-column justify-content-center">
+						<SkillLogos
+							logoGroups={[
+								{ img: Icon_ts, name: "TypeScript" },
+								{ img: Icon_js, name: "JavaScript" },
+								{ img: Icon_py, name: "Python" },
+								{ img: Icon_react, name: "React" },
+								{ img: Icon_webpack, name: "Webpack" },
+								{ img: Icon_nodejs, name: "NodeJS" },
+								{ img: Icon_gql, name: "Graphql" },
+								{ img: Icon_d3, name: "D3" },
+								{ img: Icon_sass, name: "Sass" },
+								{ img: Icon_csharp, name: "C#" },
+								{ img: Icon_c, name: "C++" },
+								{ img: Icon_go, name: "Go" },
+							]}
+						/>
+					</Box>
+					<Typography variant="body1">
+						<p>
+							I also bring strong expertise in
+							<span className="highlight">
+								{" "}
+								GIS analytics and visualization
+							</span>
+							, with proficiency in QGIS, ArcGIS, and writing
+							Python scripts to do automated data-driven spatial
+							analysis.
+						</p>
+					</Typography>
+					<Box className="d-flex flex-column justify-content-center">
+						<SkillLogos
+							logoGroups={[
+								{ img: Icon_qgis, name: "QGIS" },
+								{ img: Icon_arcgis, name: "ArcGIS" },
+							]}
+						/>
+					</Box>
+					<Typography variant="body1">
+						<p>
+							Before turning into a developer, I had a background
+							in
+							<span className="highlight">
+								{" "}
+								architectural design
+							</span>
+							, which nurtured my design skills and aesthetic
+							feelings. I built my design portfolio with Figma and
+							Adobe Suites, inlcuding Photoshop, InDesign,
+							Illustrator, and Premiere. Feel free to check my
+							design portfolio as well!
+						</p>
+					</Typography>
+					<Box className="d-flex flex-column justify-content-center">
+						<SkillLogos
+							logoGroups={[
+								{ img: Icon_figma, name: "Figma" },
+								{ img: Icon_photoshop, name: "Photoshop" },
+								{ img: Icon_indesign, name: "Indesign" },
+								{ img: Icon_illustrator, name: "Illutrator" },
+								{ img: Icon_pr, name: "Premiere" },
+							]}
+						/>
+					</Box>
+				</Box>
 				<svg
 					id="timeline-svg"
 					ref={timelineSvgRef}

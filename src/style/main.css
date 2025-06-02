@@ -19,3 +19,8 @@ p {
 body {
 	margin: 0;
 }
+
+.highlight {
+	font-weight: 700;
+	color: #fd804a;
+}
