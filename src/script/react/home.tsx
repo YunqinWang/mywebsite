@@ -3,7 +3,10 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { theme } from "../style/theme";
-
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActionArea from "@mui/material/CardActionArea";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import * as d3 from "d3";
 import React, { JSX } from "react";
@@ -28,6 +31,8 @@ import {
 	Icon_indesign,
 	Icon_illustrator,
 	Icon_pr,
+	Project_map,
+	Project_data,
 } from "../util/icon_loader";
 import _timelineData from "../data/timeline.json";
 import Stack from "@mui/material/Stack";
@@ -414,6 +419,79 @@ function SkillLogos({
 	);
 }
 
+function SectionTitle({ title }: { title: string }) {
+	return (
+		<Box
+			className="my-2 p-1"
+			style={{ backgroundColor: theme.palette.primary.light }}
+		>
+			<Typography variant="h3" color={theme.palette.primary.dark}>
+				{title}
+			</Typography>
+		</Box>
+	);
+}
+
+function ProjecrtCard({
+	image,
+	title,
+	description,
+	tags,
+	link,
+}: {
+	image: any;
+	title: string;
+	description: string;
+	tags: { title: string; color: string }[];
+	link: string;
+}) {
+	return (
+		<Card sx={{ maxWidth: 600 }}>
+			<CardActionArea
+				onClick={() => {
+					window.open(link, "_blank");
+				}}
+			>
+				<CardMedia
+					component="img"
+					height="140"
+					image={image}
+					alt={title}
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="div">
+						{title}
+					</Typography>
+					<Typography
+						variant="body2"
+						sx={{ color: "text.secondary" }}
+					>
+						{description}
+					</Typography>
+					{(() => {
+						return tags.map((t) => {
+							return <Tag title={t.title} color={t.color} />;
+						});
+					})()}
+				</CardContent>
+			</CardActionArea>
+		</Card>
+	);
+}
+
+function Tag({ title, color }: { title: string; color: string }) {
+	return (
+		<Typography
+			gutterBottom
+			variant="body2"
+			className="d-inline-block px-1 text-white me-2"
+			style={{ backgroundColor: color, borderRadius: "4px" }}
+		>
+			{title}
+		</Typography>
+	);
+}
+
 export function HomePage() {
 	const bannerSvgRef = React.useRef(null);
 	const timelineSvgRef = React.useRef(null);
@@ -438,58 +516,65 @@ export function HomePage() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Box
-				sx={{
-					width: "100%",
-					height: "75vh",
-					background:
-						"linear-gradient(0deg,rgba(93, 33, 7, 1) 0%, rgba(255, 98, 30, 1) 100%);",
-					overflow: "hidden",
-					// "&:hover": {
-					// 	bgcolor: "primary.dark",
-					// },
-				}}
-			>
-				<svg
-					id="banner-svg"
-					ref={bannerSvgRef}
-					style={{ width: "100%", height: "100%" }}
-				></svg>
-			</Box>
-			<Box
-				sx={{
-					width: "100%",
-					height: "64px",
-					bgcolor: "primary.dark",
-				}}
-			>
-				<Grid
-					container
-					spacing={2}
-					alignItems="center"
-					className="h-100 w-50 m-auto"
+			<div className="mb-4">
+				<Box
+					sx={{
+						width: "100%",
+						height: "75vh",
+						background:
+							"linear-gradient(0deg,rgba(93, 33, 7, 1) 0%, rgba(255, 98, 30, 1) 100%);",
+						overflow: "hidden",
+						// "&:hover": {
+						// 	bgcolor: "primary.dark",
+						// },
+					}}
 				>
-					<Grid size={4}>
-						<NavMenuItem title="About Me" />
+					<svg
+						id="banner-svg"
+						ref={bannerSvgRef}
+						style={{ width: "100%", height: "100%" }}
+					></svg>
+				</Box>
+				<Box
+					sx={{
+						width: "100%",
+						height: "64px",
+						bgcolor: "primary.dark",
+					}}
+				>
+					<Grid
+						container
+						spacing={2}
+						alignItems="center"
+						className="h-100 w-50 m-auto"
+					>
+						<Grid size={4}>
+							<NavMenuItem title="About Me" />
+						</Grid>
+						<Grid size={4}>
+							<NavMenuItem title="My Projects" />
+						</Grid>
+						<Grid size={4}>
+							<NavMenuItem title="Me in Wild" />
+						</Grid>
 					</Grid>
-					<Grid size={4}>
-						<NavMenuItem title="My Projects" />
-					</Grid>
-					<Grid size={4}>
-						<NavMenuItem title="Me in Wild" />
-					</Grid>
-				</Grid>
-			</Box>
+				</Box>
 
-			<Box className="w-75 m-auto">
-				<Box className="my-4">
-					<Typography variant="h2" color={theme.palette.primary.main}>
-						{"Hi :)"}
-					</Typography>
-
-					<Typography variant="body1">
-						<p>Welcome to my webiste! </p>
-						<p>
+				<Box className="w-75 m-auto">
+					<Box className="my-4">
+						<Typography
+							variant="h2"
+							color={theme.palette.primary.main}
+						>
+							{"Hi :)"}
+						</Typography>
+						<Typography variant="body1">
+							Welcome to my webiste!
+						</Typography>
+					</Box>
+					<SectionTitle title="About Me" />
+					<Box>
+						<Typography variant="body1">
 							I'm a{" "}
 							<span className="highlight">
 								{" "}
@@ -497,41 +582,41 @@ export function HomePage() {
 							</span>
 							with
 							<span className="highlight"> 3 years </span>
-							of experience, specializing in map-centric
-							applications and asset management web platforms.I
-							also have extensive experience developing dashboards
-							driven by data analytics.
-						</p>
-						<p>
+							of experience, specializing in{" "}
+							<span className="highlight">
+								map-centric applications and asset management
+								web platforms
+							</span>
+							.I also have extensive experience developing
+							dashboards driven by data analytics.
+							<br />
 							My core stack includes React, TypeScript,
 							JavaScript, Webpack, and Python with additional
 							experience in D3 library, Node.js, scss, and C#.
 							Beyond frontend work, I also have experience in
 							diverse backend and systems projects — including a
 							MapReduce engine in Go, network programming in C++.
-						</p>
-					</Typography>
+						</Typography>
 
-					<Box className="d-flex flex-column justify-content-center">
-						<SkillLogos
-							logoGroups={[
-								{ img: Icon_ts, name: "TypeScript" },
-								{ img: Icon_js, name: "JavaScript" },
-								{ img: Icon_py, name: "Python" },
-								{ img: Icon_react, name: "React" },
-								{ img: Icon_webpack, name: "Webpack" },
-								{ img: Icon_nodejs, name: "NodeJS" },
-								{ img: Icon_gql, name: "Graphql" },
-								{ img: Icon_d3, name: "D3" },
-								{ img: Icon_sass, name: "Sass" },
-								{ img: Icon_csharp, name: "C#" },
-								{ img: Icon_c, name: "C++" },
-								{ img: Icon_go, name: "Go" },
-							]}
-						/>
-					</Box>
-					<Typography variant="body1">
-						<p>
+						<Box className="d-flex flex-column justify-content-center">
+							<SkillLogos
+								logoGroups={[
+									{ img: Icon_ts, name: "TypeScript" },
+									{ img: Icon_js, name: "JavaScript" },
+									{ img: Icon_py, name: "Python" },
+									{ img: Icon_react, name: "React" },
+									{ img: Icon_webpack, name: "Webpack" },
+									{ img: Icon_nodejs, name: "NodeJS" },
+									{ img: Icon_gql, name: "Graphql" },
+									{ img: Icon_d3, name: "D3" },
+									{ img: Icon_sass, name: "Sass" },
+									{ img: Icon_csharp, name: "C#" },
+									{ img: Icon_c, name: "C++" },
+									{ img: Icon_go, name: "Go" },
+								]}
+							/>
+						</Box>
+						<Typography variant="body1">
 							I also bring strong expertise in
 							<span className="highlight">
 								{" "}
@@ -540,49 +625,143 @@ export function HomePage() {
 							, with proficiency in QGIS, ArcGIS, and writing
 							Python scripts to do automated data-driven spatial
 							analysis.
-						</p>
-					</Typography>
-					<Box className="d-flex flex-column justify-content-center">
-						<SkillLogos
-							logoGroups={[
-								{ img: Icon_qgis, name: "QGIS" },
-								{ img: Icon_arcgis, name: "ArcGIS" },
-							]}
-						/>
-					</Box>
-					<Typography variant="body1">
-						<p>
+						</Typography>
+						<Box className="d-flex flex-column justify-content-center">
+							<SkillLogos
+								logoGroups={[
+									{ img: Icon_qgis, name: "QGIS" },
+									{ img: Icon_arcgis, name: "ArcGIS" },
+								]}
+							/>
+						</Box>
+						<Typography variant="body1">
 							Before turning into a developer, I had a background
 							in
 							<span className="highlight">
 								{" "}
-								architectural design
+								computational design
 							</span>
 							, which nurtured my design skills and aesthetic
 							feelings. I built my design portfolio with Figma and
 							Adobe Suites, inlcuding Photoshop, InDesign,
-							Illustrator, and Premiere. Feel free to check my
-							design portfolio as well!
-						</p>
-					</Typography>
-					<Box className="d-flex flex-column justify-content-center">
-						<SkillLogos
-							logoGroups={[
-								{ img: Icon_figma, name: "Figma" },
-								{ img: Icon_photoshop, name: "Photoshop" },
-								{ img: Icon_indesign, name: "Indesign" },
-								{ img: Icon_illustrator, name: "Illutrator" },
-								{ img: Icon_pr, name: "Premiere" },
-							]}
-						/>
+							Illustrator, and Premiere. Feel free to check{" "}
+							<span>
+								{" "}
+								<a
+									className="highlight-link"
+									href="https://drive.google.com/file/d/152SlyeCKmgt5qgHj4R1O7QAZdcXAXVNl/view?usp=drive_link"
+									target="_blank"
+								>
+									my design portfolio
+								</a>
+							</span>{" "}
+							as well!
+						</Typography>
+						<Box className="d-flex flex-column justify-content-center">
+							<SkillLogos
+								logoGroups={[
+									{ img: Icon_figma, name: "Figma" },
+									{ img: Icon_photoshop, name: "Photoshop" },
+									{ img: Icon_indesign, name: "Indesign" },
+									{
+										img: Icon_illustrator,
+										name: "Illutrator",
+									},
+									{ img: Icon_pr, name: "Premiere" },
+								]}
+							/>
+						</Box>
 					</Box>
+					<SectionTitle title="My Experience" />
+					<Box>
+						<Typography variant="body1">
+							I am currecntly working as a frontend developer at
+							Precision Systems Inc.
+							<br />I have Master of Science Degree in Computer
+							Scienve from Georgia Tech and Master of Science
+							Degree in Computational Architecture from Cornell.
+						</Typography>
+					</Box>
+
+					<svg
+						id="timeline-svg"
+						ref={timelineSvgRef}
+						style={{ width: "100%", height: "500px" }}
+					></svg>
+					<SectionTitle title="My Projects" />
+					<Grid
+						container
+						rowSpacing={1}
+						columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+					>
+						{(() => {
+							let data = [
+								{
+									image: Project_map,
+									title: "Map App",
+									description:
+										"The interactive map invites you to travel with me together! I have pinned my photography work during travelling to the map and attached little stories to them.",
+									tags: [
+										{
+											title: "Openlayers",
+											color: "#613F89",
+										},
+										{
+											title: "Azure blob storage",
+											color: "#AE1A77",
+										},
+									],
+									link: "",
+								},
+								{
+									image: Project_data,
+									title: "Data Analytics and Visualization",
+									description:
+										"The project uses d3 library to visualize the job gain and loss in the past two decades in a vivid way. Filtering the data based on the attributes give different insights. ",
+									tags: [
+										{ title: "D3", color: "#317498" },
+										{
+											title: "Javascript",
+											color: "#C28E09",
+										},
+									],
+									link: "https://yunqinwang.github.io/5100-project3",
+								},
+								{
+									image: Project_data,
+									title: "Data Analytics and Visualization",
+									description:
+										"The project uses d3 library to visualize the job gain and loss in the past two decades in a vivid way. Filtering the data based on the attributes give different insights. ",
+									tags: [
+										{ title: "D3", color: "#317498" },
+										{
+											title: "Javascript",
+											color: "#C28E09",
+										},
+									],
+									link: "https://yunqinwang.github.io/5100-project3",
+								},
+							];
+							return data.map((d, index) => {
+								return (
+									<Grid
+										key={index}
+										size={{ xs: 2, sm: 4, md: 4 }}
+									>
+										<ProjecrtCard
+											image={d.image}
+											title={d.title}
+											description={d.description}
+											tags={d.tags}
+											link={d.link}
+										/>
+									</Grid>
+								);
+							});
+						})()}
+					</Grid>
 				</Box>
-				<svg
-					id="timeline-svg"
-					ref={timelineSvgRef}
-					style={{ width: "100%", height: "500px" }}
-				></svg>
-			</Box>
+			</div>
 		</ThemeProvider>
 	);
 }

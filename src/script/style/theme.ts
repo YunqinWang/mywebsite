@@ -5,7 +5,7 @@ import "../../style/theme.scss";
 let theme = createTheme({
 	palette: {
 		primary: {
-			light: "#DDCDEA",
+			light: "#EEE2F7",
 			main: "#A082B9",
 			dark: "#503962",
 			contrastText: "#fff",
@@ -36,6 +36,7 @@ theme = createTheme(theme, {
 		},
 		h4: {
 			fontSize: 20,
+			fontWeight: 500,
 		},
 		h5: {
 			fontSize: 18,
@@ -47,6 +48,7 @@ theme = createTheme(theme, {
 		},
 		body1: {
 			fontSize: 15,
+			marginBottom: "12px",
 		},
 		body2: {
 			fontSize: 12,

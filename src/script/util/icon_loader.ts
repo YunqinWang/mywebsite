@@ -57,3 +57,9 @@ export const Icon_indesign = _Icon_indesign;
 
 import _Icon_pr from "../../image/logo-pr.png";
 export const Icon_pr = _Icon_pr;
+
+import _Project_map from "../../image/project-map.png";
+export const Project_map = _Project_map;
+
+import _Project_data from "../../image/project-data.png";
+export const Project_data = _Project_data;

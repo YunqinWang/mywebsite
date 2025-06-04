@@ -24,3 +24,16 @@ body {
 	font-weight: 700;
 	color: #fd804a;
 }
+
+a {
+	color: #000 !important;
+	text-decoration: dotted !important;
+	background-color: #f9dacc;
+	transition: ease-in-out;
+}
+
+a:hover {
+	color: #fff !important;
+	background-color: #fd804a;
+	transition: ease-in-out;
+}
