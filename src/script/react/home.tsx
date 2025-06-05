@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { theme } from "../style/theme";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -33,9 +33,14 @@ import {
 	Icon_pr,
 	Project_map,
 	Project_data,
+	Project_game,
+	Project_design,
+	Project_crawler,
+	Project_geo,
 } from "../util/icon_loader";
 import _timelineData from "../data/timeline.json";
 import Stack from "@mui/material/Stack";
+import { Tag } from "./component";
 
 function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 	let svgChart = d3.select(`svg#${svgId}`);
@@ -365,7 +370,7 @@ function drawTimeline(
 		.style("font-size", "12px");
 }
 
-function NavMenuItem({ title }: { title: string }) {
+function NavMenuItem({ title, target }: { title: string; target: string }) {
 	// return (
 	// 	<Box>
 	// 		<Typography variant="h4" color="#fff">
@@ -373,14 +378,35 @@ function NavMenuItem({ title }: { title: string }) {
 	// 		</Typography>
 	// 	</Box>
 	// );
-	const Item = styled(Box)(({ theme }) => ({
+	const Item = styled(Button)(({ theme }) => ({
 		backgroundColor: "none",
-		...theme.typography.h3,
+		...theme.typography.h4,
 		padding: theme.spacing(1),
 		textAlign: "center",
 		color: "rgb(218, 218, 218)",
+		"&:hover": {
+			color: theme.palette.secondary.light,
+		},
 	}));
-	return <Item>{title}</Item>;
+	return (
+		<Item
+			onClick={() => {
+				// document
+				// 	.getElementById(target)
+				// 	?.scrollIntoView({ behavior: "smooth" });
+
+				let t = document.getElementById(target);
+				if (t != undefined) {
+					const offset = 100;
+					const topPos =
+						t.getBoundingClientRect().top + window.scrollY - offset;
+					window.scrollTo({ top: topPos, behavior: "smooth" });
+				}
+			}}
+		>
+			{title}
+		</Item>
+	);
 }
 
 function SkillLogos({
@@ -421,14 +447,16 @@ function SkillLogos({
 
 function SectionTitle({ title }: { title: string }) {
 	return (
-		<Box
+		<Typography
 			className="my-2 p-1"
+			variant="h3"
+			color={theme.palette.primary.dark}
+			component={"div"}
 			style={{ backgroundColor: theme.palette.primary.light }}
+			id={title.toLowerCase().replaceAll(" ", "-")}
 		>
-			<Typography variant="h3" color={theme.palette.primary.dark}>
-				{title}
-			</Typography>
-		</Box>
+			{title}
+		</Typography>
 	);
 }
 
@@ -454,7 +482,7 @@ function ProjecrtCard({
 			>
 				<CardMedia
 					component="img"
-					height="140"
+					height="180"
 					image={image}
 					alt={title}
 				/>
@@ -464,7 +492,7 @@ function ProjecrtCard({
 					</Typography>
 					<Typography
 						variant="body2"
-						sx={{ color: "text.secondary" }}
+						sx={{ color: "text.secondary", height: "80px" }}
 					>
 						{description}
 					</Typography>
@@ -476,19 +504,6 @@ function ProjecrtCard({
 				</CardContent>
 			</CardActionArea>
 		</Card>
-	);
-}
-
-function Tag({ title, color }: { title: string; color: string }) {
-	return (
-		<Typography
-			gutterBottom
-			variant="body2"
-			className="d-inline-block px-1 text-white me-2"
-			style={{ backgroundColor: color, borderRadius: "4px" }}
-		>
-			{title}
-		</Typography>
 	);
 }
 
@@ -540,6 +555,9 @@ export function HomePage() {
 						width: "100%",
 						height: "64px",
 						bgcolor: "primary.dark",
+						position: "sticky",
+						top: 0,
+						zIndex: 1000,
 					}}
 				>
 					<Grid
@@ -549,13 +567,19 @@ export function HomePage() {
 						className="h-100 w-50 m-auto"
 					>
 						<Grid size={4}>
-							<NavMenuItem title="About Me" />
+							<NavMenuItem title="About Me" target="about-me" />
 						</Grid>
 						<Grid size={4}>
-							<NavMenuItem title="My Projects" />
+							<NavMenuItem
+								title="My Experience"
+								target="my-experience"
+							/>
 						</Grid>
 						<Grid size={4}>
-							<NavMenuItem title="Me in Wild" />
+							<NavMenuItem
+								title="My Projects"
+								target="my-projects"
+							/>
 						</Grid>
 					</Grid>
 				</Box>
@@ -691,33 +715,56 @@ export function HomePage() {
 					<SectionTitle title="My Projects" />
 					<Grid
 						container
-						rowSpacing={1}
+						rowSpacing={3}
 						columnSpacing={{ xs: 1, sm: 2, md: 3 }}
 					>
 						{(() => {
 							let data = [
+								// {
+								// 	image: Project_map,
+								// 	title: "Map App",
+								// 	description:
+								// 		"The interactive map invites you to travel with me together! I have pinned my photography work during travelling to the map and attached little stories to them.",
+								// 	tags: [
+								// 		{
+								// 			title: "TypeScript",
+								// 			color: "#E8AE00",
+								// 		},
+								// 		{
+								// 			title: "React",
+								// 			color: "#613F89",
+								// 		},
+								// 		{
+								// 			title: "Openlayers",
+								// 			color: "#808A43",
+								// 		},
+								// 		{
+								// 			title: "Azure",
+								// 			color: "#AE1A77",
+								// 		},
+								// 	],
+								// 	link: "",
+								// },
 								{
-									image: Project_map,
-									title: "Map App",
+									image: Project_geo,
+									title: "Geo Data Visualization",
 									description:
-										"The interactive map invites you to travel with me together! I have pinned my photography work during travelling to the map and attached little stories to them.",
+										"This project visualizes shooting incidents across New York City using an interactive map to highlight geospatial patterns in public safety. Leveraging the D3.js library, I projected the incident data onto a custom map, enabling users to explore spatial trends and hotspots effectively.",
 									tags: [
+										{ title: "D3", color: "#317498" },
 										{
-											title: "Openlayers",
-											color: "#613F89",
-										},
-										{
-											title: "Azure blob storage",
-											color: "#AE1A77",
+											title: "Javascript",
+											color: "#C28E09",
 										},
 									],
-									link: "",
+									link: "https://yunqinwang.github.io/d3-Project2/",
 								},
+
 								{
 									image: Project_data,
-									title: "Data Analytics and Visualization",
+									title: "Data Visualization",
 									description:
-										"The project uses d3 library to visualize the job gain and loss in the past two decades in a vivid way. Filtering the data based on the attributes give different insights. ",
+										"The project uses the D3.js library to vividly visualize job gains and losses over the past two decades. Interactive filters allow users to explore the data by various attributes, revealing different insights and trends across time and categories.",
 									tags: [
 										{ title: "D3", color: "#317498" },
 										{
@@ -728,18 +775,36 @@ export function HomePage() {
 									link: "https://yunqinwang.github.io/5100-project3",
 								},
 								{
-									image: Project_data,
-									title: "Data Analytics and Visualization",
+									image: Project_crawler,
+									title: "Image Crawler",
 									description:
-										"The project uses d3 library to visualize the job gain and loss in the past two decades in a vivid way. Filtering the data based on the attributes give different insights. ",
+										"The goal of this task is to perform a web crawl on a user-provided URL. The crawler will parse the web page, extract all image elements, and return a JSON array containing the URLs of all images found on the page.",
+									tags: [{ title: "Java", color: "#963F36" }],
+									link: "https://github.com/YunqinWang/image-crawler",
+								},
+								{
+									image: Project_game,
+									title: "Mobile Game Design",
+									description:
+										"The trailer for the mobile game No Screws Attached showcases gameplay and serves as a promotional advertisement. I created a variety of design assets for the trailer using Adobe Creative Suite and Figma, contributing to both the visual storytelling and brand presentation.",
 									tags: [
-										{ title: "D3", color: "#317498" },
+										{ title: "Adobe", color: "#DE5320" },
 										{
-											title: "Javascript",
-											color: "#C28E09",
+											title: "Figma",
+											color: "#4F6FB8",
 										},
 									],
-									link: "https://yunqinwang.github.io/5100-project3",
+									link: "https://www.youtube.com/watch?v=wRDfUqbCJvo&ab_channel=StickyKeysStudios",
+								},
+								{
+									image: Project_design,
+									title: "Design Portfolio",
+									description:
+										"I created this portfolio during my master's program at Cornell University. It showcases my graphic design work, studio and elective projects, and published designs. The collection reflects my growth as a designer and highlights a diverse range of creative and technical skills.",
+									tags: [
+										{ title: "Adobe", color: "#DE5320" },
+									],
+									link: "https://drive.google.com/file/d/152SlyeCKmgt5qgHj4R1O7QAZdcXAXVNl/view?usp=drive_link",
 								},
 							];
 							return data.map((d, index) => {

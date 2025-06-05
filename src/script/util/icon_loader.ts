@@ -63,3 +63,24 @@ export const Project_map = _Project_map;
 
 import _Project_data from "../../image/project-data.png";
 export const Project_data = _Project_data;
+
+import _Project_geo from "../../image/project-geo.png";
+export const Project_geo = _Project_geo;
+
+import _Project_game from "../../image/project-game.png";
+export const Project_game = _Project_game;
+
+import _Project_design from "../../image/project-design.png";
+export const Project_design = _Project_design;
+
+import _Project_crawler from "../../image/project-crawler.jpg";
+export const Project_crawler = _Project_crawler;
+
+import _Icon_linkedin from "../../image/linkedin.png";
+export const Icon_linkedin = _Icon_linkedin;
+
+import _Icon_github from "../../image/github.png";
+export const Icon_github = _Icon_github;
+
+import _Icon_gmail from "../../image/gmail.png";
+export const Icon_gmail = _Icon_gmail;

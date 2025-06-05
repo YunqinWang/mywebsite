@@ -1,12 +1,26 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { theme } from "../style/theme";
 
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import * as d3 from "d3";
 import React from "react";
+import { Icon_github, Icon_gmail, Icon_linkedin } from "../util/icon_loader";
+
+export function Tag({ title, color }: { title: string; color: string }) {
+	return (
+		<Typography
+			gutterBottom
+			variant="body2"
+			className="d-inline-block px-1 text-white me-2"
+			style={{ backgroundColor: color, borderRadius: "4px" }}
+		>
+			{title}
+		</Typography>
+	);
+}
 
 export function MyFooter() {
 	return (
@@ -52,39 +66,71 @@ export function MyFooter() {
 					<h5 className="mb-3">CONTACT</h5>
 					{(() => {
 						let data = [
-							{ label: "Email", value: "wyq0307qyw@gmail.com" },
+							{
+								label: "Email",
+								value: "wyq0307qyw@gmail.com",
+								image: undefined,
+							},
+							{
+								label: "Address",
+								value: "Washington, DC",
+								image: undefined,
+							},
 							{
 								label: "Github",
 								value: "https://github.com/YunqinWang",
+								image: Icon_github,
 							},
 							{
 								label: "LinkedIn",
 								value: "https://www.linkedin.com/in/fiona-yunqin-wang-4343971a4/",
+								image: Icon_linkedin,
 							},
 						];
 						let items = data.map((d, i) => {
 							return (
 								<Grid container spacing={3} key={i}>
-									<Grid size={3}>
+									<Grid size={2}>
 										<Typography
 											variant="body1"
-											gutterBottom
+											marginBottom={0}
 										>
 											{d.label}
 										</Typography>
 									</Grid>
-									<Grid size={9}>
-										<Typography
-											variant="body1"
-											gutterBottom
-										>
-											{d.value}
-										</Typography>
+									<Grid size={10}>
+										<div className="d-flex gap-2 align-items-center">
+											{d.image ? (
+												<a
+													href={d.value}
+													target="_blank"
+													className="d-flex align-items-center"
+													style={{
+														background: "none",
+													}}
+												>
+													<img
+														src={d.image}
+														style={{
+															width: "16px",
+															height: "16px",
+														}}
+													/>
+												</a>
+											) : (
+												<Typography
+													variant="body1"
+													marginBottom={0}
+												>
+													{d.value}
+												</Typography>
+											)}
+										</div>
 									</Grid>
 								</Grid>
 							);
 						});
-						return <div>{items}</div>;
+						return <Stack spacing={1}>{items}</Stack>;
 					})()}
 				</Box>
 			</Box>
