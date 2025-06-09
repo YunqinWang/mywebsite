@@ -578,7 +578,7 @@ export function HomePage() {
 							},
 							{
 								title: "My CV",
-								target: "https://drive.google.com/file/d/17OvQVhs6GFkhN6F1W325EYk0PI4jE8RM/view",
+								target: "https://drive.google.com/file/d/1259SnuYYv94AH7pVorfhHCoMmHSKDGqD/view?usp=sharing",
 							},
 						];
 						let navItems = items.map((item) => {
