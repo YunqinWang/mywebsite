@@ -70,21 +70,31 @@ export function MyFooter() {
 								label: "Email",
 								value: "wyq0307qyw@gmail.com",
 								image: undefined,
+								showValue: true,
 							},
 							{
 								label: "Address",
 								value: "Washington, DC",
 								image: undefined,
+								showValue: true,
 							},
 							{
 								label: "Github",
 								value: "https://github.com/YunqinWang",
 								image: Icon_github,
+								showValue: true,
+							},
+							{
+								label: "",
+								value: "https://github.gatech.edu/ywang4362",
+								image: Icon_github,
+								showValue: true,
 							},
 							{
 								label: "LinkedIn",
 								value: "https://www.linkedin.com/in/fiona-yunqin-wang-4343971a4/",
 								image: Icon_linkedin,
+								showValue: false,
 							},
 						];
 						let items = data.map((d, i) => {
@@ -98,7 +108,10 @@ export function MyFooter() {
 											{d.label}
 										</Typography>
 									</Grid>
-									<Grid size={10}>
+									<Grid
+										size={10}
+										className="d-flex align-items-center"
+									>
 										<div className="d-flex gap-2 align-items-center">
 											{d.image ? (
 												<a
@@ -117,14 +130,13 @@ export function MyFooter() {
 														}}
 													/>
 												</a>
-											) : (
-												<Typography
-													variant="body1"
-													marginBottom={0}
-												>
-													{d.value}
-												</Typography>
-											)}
+											) : null}
+											<Typography
+												variant="body1"
+												marginBottom={0}
+											>
+												{d.showValue ? d.value : ""}
+											</Typography>
 										</div>
 									</Grid>
 								</Grid>

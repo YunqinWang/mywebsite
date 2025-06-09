@@ -401,6 +401,8 @@ function NavMenuItem({ title, target }: { title: string; target: string }) {
 					const topPos =
 						t.getBoundingClientRect().top + window.scrollY - offset;
 					window.scrollTo({ top: topPos, behavior: "smooth" });
+				} else {
+					window.open(target, "_blank");
 				}
 			}}
 		>
@@ -560,28 +562,53 @@ export function HomePage() {
 						zIndex: 1000,
 					}}
 				>
-					<Grid
-						container
-						spacing={2}
-						alignItems="center"
-						className="h-100 w-50 m-auto"
-					>
-						<Grid size={4}>
-							<NavMenuItem title="About Me" target="about-me" />
-						</Grid>
-						<Grid size={4}>
-							<NavMenuItem
-								title="My Experience"
-								target="my-experience"
-							/>
-						</Grid>
-						<Grid size={4}>
-							<NavMenuItem
-								title="My Projects"
-								target="my-projects"
-							/>
-						</Grid>
-					</Grid>
+					{(() => {
+						let items = [
+							{
+								title: "About Me",
+								target: "about-me",
+							},
+							{
+								title: "My Experience",
+								target: "my-experience",
+							},
+							{
+								title: "My Projects",
+								target: "my-projects",
+							},
+							{
+								title: "My CV",
+								target: "https://drive.google.com/file/d/17OvQVhs6GFkhN6F1W325EYk0PI4jE8RM/view",
+							},
+						];
+						let navItems = items.map((item) => {
+							return (
+								<Grid
+									size={3}
+									sx={{
+										borderRight:
+											"1px solid rgb(159, 151, 171)",
+										textAlign: "center",
+									}}
+								>
+									<NavMenuItem
+										title={item.title}
+										target={item.target}
+									/>
+								</Grid>
+							);
+						});
+						return (
+							<Grid
+								container
+								spacing={0}
+								alignItems="center"
+								className="h-100 w-50 m-auto"
+							>
+								{navItems}
+							</Grid>
+						);
+					})()}
 				</Box>
 
 				<Box className="w-75 m-auto">

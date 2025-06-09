@@ -1,4 +1,4 @@
-import _Icon_map from "../../image/map.png";
+import _Icon_map from "../../image/map_72.png";
 export const Icon_map = _Icon_map;
 
 import _Icon_ts from "../../image/logo-typescript.png";
