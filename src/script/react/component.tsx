@@ -149,3 +149,23 @@ export function MyFooter() {
 		</ThemeProvider>
 	);
 }
+
+export function SectionTitle({ title }: { title: string }) {
+	return (
+		<Typography
+			className="my-2 p-1"
+			variant="h3"
+			color={theme.palette.primary.dark}
+			component={"div"}
+			style={{
+				background: "linear-gradient(145deg, #e3deffff, #403555ff)",
+				boxShadow: "inset -3px -3px 10px rgba(255, 255, 255, 0.2)",
+				inset: "3px 3px 10px rgba(0, 0, 0, 0.3)",
+				marginBottom: "12px",
+			}}
+			id={title.toLowerCase().replaceAll(" ", "-")}
+		>
+			{title}
+		</Typography>
+	);
+}

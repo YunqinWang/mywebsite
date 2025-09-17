@@ -14,10 +14,13 @@
 
 p {
 	font-family: "Inter";
+	padding: 0px;
+	color: #fff;
 }
 
 body {
 	margin: 0;
+	background-color: #151515 !important;
 }
 
 .highlight {
@@ -36,4 +39,28 @@ a:hover {
 	color: #fff !important;
 	background-color: #fd804a;
 	transition: ease-in-out;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.5);
+		opacity: 0.5;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes growLine {
+	from {
+		height: 0;
+	}
+	to {
+		height: 100%;
+	}
 }

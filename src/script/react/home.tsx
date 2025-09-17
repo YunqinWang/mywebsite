@@ -40,7 +40,7 @@ import {
 } from "../util/icon_loader";
 import _timelineData from "../data/timeline.json";
 import Stack from "@mui/material/Stack";
-import { Tag } from "./component";
+import { SectionTitle, Tag } from "./component";
 
 function drawBanner(svgId: string, boxSize: { width: number; height: number }) {
 	let svgChart = d3.select(`svg#${svgId}`);
@@ -177,17 +177,20 @@ function drawTimeline(
 	boxSize: { width: number; height: number }
 ) {
 	let svgChart = d3.select(`svg#${svgId}`);
-	const margins = { s: 50, e: 200, y: 20 };
+	const margins = { s: 50, e: 200, y: 10 };
 	let mainG = svgChart
 		.append("g")
-		.attr("transform", `translate(${margins.s}, ${margins.y + 240})`);
+		.attr(
+			"transform",
+			`translate(${margins.s}, ${margins.y + boxSize.height / 2})`
+		);
 
 	let labelG = mainG.append("g");
 	["Work", "Education"].forEach((d) => {
 		labelG
 			.append("text")
 			.text(d)
-			.attr("fill", d == "Work" ? "#7E5A9B" : "#BD4916")
+			.attr("fill", d == "Work" ? "#a384bdff" : "#e66d39ff")
 			.attr("transform", `translate(${10},${d == "Work" ? -15 : 25})`);
 	});
 
@@ -248,8 +251,8 @@ function drawTimeline(
 	};
 
 	const getColorByType = function (d: { type: string }) {
-		if (d.type == "school") return "#BD4916";
-		return "#7E5A9B";
+		if (d.type == "school") return "#f97238ff";
+		return "#ac84ccff";
 	};
 
 	let timelineData = _timelineData.sort((a, b) => {
@@ -447,21 +450,6 @@ function SkillLogos({
 	);
 }
 
-function SectionTitle({ title }: { title: string }) {
-	return (
-		<Typography
-			className="my-2 p-1"
-			variant="h3"
-			color={theme.palette.primary.dark}
-			component={"div"}
-			style={{ backgroundColor: theme.palette.primary.light }}
-			id={title.toLowerCase().replaceAll(" ", "-")}
-		>
-			{title}
-		</Typography>
-	);
-}
-
 function ProjecrtCard({
 	image,
 	title,
@@ -509,6 +497,100 @@ function ProjecrtCard({
 	);
 }
 
+function VerticalTimelineElement({
+	startDate,
+	endDate,
+	title,
+	location,
+	description,
+	subDescription,
+}: {
+	startDate: Date;
+	endDate: Date | "Present";
+	title: string;
+	location: string;
+	description: string;
+	subDescription: {
+		skills: string;
+		text: string;
+	}[];
+}) {
+	return (
+		<div
+			style={{
+				position: "relative",
+				borderLeft: "solid 2px #aeaeae",
+				marginBottom: "16px",
+				height: "100%",
+				animation: "growLine 1s ease-out",
+			}}
+		>
+			<div
+				style={{
+					position: "absolute",
+					left: "-7px",
+					width: "12px",
+					height: "12px",
+					borderRadius: "50%",
+					background: "#c1c1c1ff",
+					animation: "pulse 1.5s infinite",
+				}}
+			></div>
+			<div className="ps-4">
+				<p style={{ marginBottom: "1px" }}>{title}</p>
+				<p style={{ fontSize: "15px", color: "#ff6b01ff" }}>
+					{location}{" "}
+					{startDate.toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "2-digit",
+					})}
+					-
+					{endDate == "Present"
+						? endDate
+						: endDate.toLocaleDateString("en-US", {
+								year: "numeric",
+								month: "2-digit",
+						  })}
+				</p>
+				<p style={{ fontSize: "16px" }}>{description}</p>
+				{(() => {
+					let subs = subDescription.map((sd) => {
+						return (
+							<div
+								className="d-flex w-100 position-relative"
+								style={{ gap: "16px" }}
+							>
+								<div
+									style={{
+										width: "6px",
+										height: "16px",
+										background: "#ffd2aeff",
+									}}
+								></div>
+								<div style={{ width: "calc(100% - 22px)" }}>
+									<p
+										style={{
+											fontSize: "14px",
+											margin: "0px",
+											color: "#ffd2aeff",
+										}}
+									>
+										{sd.skills}
+									</p>
+									<p style={{ fontSize: "16px" }}>
+										{sd.text}
+									</p>
+								</div>
+							</div>
+						);
+					});
+					return <div>{subs}</div>;
+				})()}
+			</div>
+		</div>
+	);
+}
+
 export function HomePage() {
 	const bannerSvgRef = React.useRef(null);
 	const timelineSvgRef = React.useRef(null);
@@ -537,7 +619,7 @@ export function HomePage() {
 				<Box
 					sx={{
 						width: "100%",
-						height: "75vh",
+						height: "60vh",
 						background:
 							"linear-gradient(0deg,rgba(93, 33, 7, 1) 0%, rgba(255, 98, 30, 1) 100%);",
 						overflow: "hidden",
@@ -556,7 +638,9 @@ export function HomePage() {
 					sx={{
 						width: "100%",
 						height: "64px",
-						bgcolor: "primary.dark",
+						// bgcolor: "primary.dark",
+						background:
+							"linear-gradient(0deg, #8c75b7ff 0%, #433857ff 25%, #ab9dc8ff 100%);",
 						position: "sticky",
 						top: 0,
 						zIndex: 1000,
@@ -578,7 +662,7 @@ export function HomePage() {
 							},
 							{
 								title: "My CV",
-								target: "https://drive.google.com/file/d/1259SnuYYv94AH7pVorfhHCoMmHSKDGqD/view?usp=sharing",
+								target: "https://drive.google.com/file/d/1259SnuYYv94AH7p  VorfhHCoMmHSKDGqD/view?usp=sharing",
 							},
 						];
 						let navItems = items.map((item) => {
@@ -611,16 +695,13 @@ export function HomePage() {
 					})()}
 				</Box>
 
-				<Box className="w-75 m-auto">
+				<Box className="m-auto" style={{ width: "60%" }}>
 					<Box className="my-4">
 						<Typography
 							variant="h2"
 							color={theme.palette.primary.main}
 						>
 							{"Hi :)"}
-						</Typography>
-						<Typography variant="body1">
-							Welcome to my webiste!
 						</Typography>
 					</Box>
 					<SectionTitle title="About Me" />
@@ -629,24 +710,25 @@ export function HomePage() {
 							I'm a{" "}
 							<span className="highlight">
 								{" "}
-								frontend developer{" "}
+								software engineer{" "}
 							</span>
 							with
 							<span className="highlight"> 3 years </span>
 							of experience, specializing in{" "}
 							<span className="highlight">
-								map-centric applications and asset management
-								web platforms
-							</span>
-							.I also have extensive experience developing
-							dashboards driven by data analytics.
+								map-centric applications, traffic infrastucture
+								management web platforms,
+							</span>{" "}
+							and{" "}
+							<span className="highlight">
+								developing data-driven algorithms
+							</span>{" "}
+							assisting decision making and buget spending.
 							<br />
 							My core stack includes React, TypeScript,
-							JavaScript, Webpack, and Python with additional
-							experience in D3 library, Node.js, scss, and C#.
-							Beyond frontend work, I also have experience in
-							diverse backend and systems projects — including a
-							MapReduce engine in Go, network programming in C++.
+							JavaScript, Webpack, Python, GeoPandas with
+							additional experience in C#, D3 library, Node.js,
+							and scss.
 						</Typography>
 
 						<Box className="d-flex flex-column justify-content-center">
@@ -662,8 +744,6 @@ export function HomePage() {
 									{ img: Icon_d3, name: "D3" },
 									{ img: Icon_sass, name: "Sass" },
 									{ img: Icon_csharp, name: "C#" },
-									{ img: Icon_c, name: "C++" },
-									{ img: Icon_go, name: "Go" },
 								]}
 							/>
 						</Box>
@@ -671,11 +751,12 @@ export function HomePage() {
 							I also bring strong expertise in
 							<span className="highlight">
 								{" "}
-								GIS analytics and visualization
+								GIS analytics, spatial analytics and
+								visualization
 							</span>
-							, with proficiency in QGIS, ArcGIS, and writing
-							Python scripts to do automated data-driven spatial
-							analysis.
+							, with proficiency in QGIS, ArcGIS, and Python
+							scripting for automated, data-driven spatial
+							analysis and visualization.
 						</Typography>
 						<Box className="d-flex flex-column justify-content-center">
 							<SkillLogos
@@ -694,8 +775,7 @@ export function HomePage() {
 							</span>
 							, which nurtured my design skills and aesthetic
 							feelings. I built my design portfolio with Figma and
-							Adobe Suites, inlcuding Photoshop, InDesign,
-							Illustrator, and Premiere. Feel free to check{" "}
+							Adobe Suites. Feel free to check{" "}
 							<span>
 								{" "}
 								<a
@@ -726,19 +806,116 @@ export function HomePage() {
 					<SectionTitle title="My Experience" />
 					<Box>
 						<Typography variant="body1">
-							I am currecntly working as a frontend developer at
+							I am currecntly working as a software engineer at
 							Precision Systems Inc.
-							<br />I have Master of Science Degree in Computer
-							Scienve from Georgia Tech and Master of Science
-							Degree in Computational Architecture from Cornell.
 						</Typography>
 					</Box>
-
 					<svg
 						id="timeline-svg"
 						ref={timelineSvgRef}
-						style={{ width: "100%", height: "500px" }}
+						style={{ width: "100%", height: "450px" }}
 					></svg>
+
+					<SectionTitle title="Professional Experience" />
+
+					<VerticalTimelineElement
+						startDate={new Date(2022, 0)}
+						endDate={"Present"}
+						title="Software Engineer"
+						location="Precision Systems Inc."
+						description=""
+						subDescription={[
+							{
+								skills: "TypeScript, React, .Net, Webpack, Scss, Graphql, D3",
+								text: "Developed the majority of the full-stack functionality for Transportation Asset Management Systems covering multiple infrastructure types (sidewalks, alleys, streetlights). Integrated field data collection, office review, and condition tracking into a single system, reducing manual processes and enhancing asset management accuracy.",
+							},
+							{
+								skills: "Python, Pandas, GeoPandas, Numpy",
+								text: "Conducted diverse data analyses on traffic volumes, crash incidents, and infrastructure geospatial/condition data, providing insights that guided government budget allocation and infrastructure investments, including new bridge planning.",
+							},
+							{
+								skills: "Python, Pandas, GeoPandas, Numpy",
+								text: "Designed and implemented algorithms to automate the prioritization of sidewalk and intersection maintenance/inspections, integrating traffic patterns, infrastructure conditions, cost analyses, and equity considerations to optimize resource allocation.",
+							},
+							{
+								skills: "TypeScript, JavaScript, Node.js, GTFS, Graphql",
+								text: "Implemented APIs for a real-time transit application, providing static transit schedules through database queries and real-time updates by connecting to multiple transit data endpoints, improving user access to up-to-date transit information.",
+							},
+							{
+								skills: "Python, QT, TypeScript, React, GIS",
+								text: "Led the development of QGIS plugins that automated traffic diagram and layout creation, increasing productivity by 800%. Engineered dynamic plugins capable of handling varied traffic data inputs, improving visualization and workflow efficiency.",
+							},
+						]}
+					/>
+					<VerticalTimelineElement
+						startDate={new Date(2022, 5)}
+						endDate={new Date(2022, 7)}
+						title="Web Developer Intern"
+						location="Charlie Media LLC."
+						description=""
+						subDescription={[
+							{
+								skills: "Node.js, JavaScript",
+								text: "Implemented an AWS Lex chatbot, developing Lambda functions and API integrations that enabled clients to interact seamlessly with the bot and access information about location services.",
+							},
+							{
+								skills: "Vue.js",
+								text: "Contributed to the development of an online math education product by implementing features that helped children learn foundational geometry concepts.",
+							},
+							{
+								skills: "JavaScript, Hubl, Bootstrap, CSS",
+								text: "Helped develop the location websites and implemented flexible, reusable drag-and-drop modules in HubSpot to streamline content management, which received highly positive feedback from clients.",
+							},
+							{
+								skills: " React",
+								text: "Developed and integrated custom features for web projects, such as a calendar calculator for legal services, using reusable components and scalable architecture.",
+							},
+						]}
+					/>
+					<VerticalTimelineElement
+						startDate={new Date(2022, 5)}
+						endDate={new Date(2022, 11)}
+						title="Web Developer + UI/UX Intern"
+						location="Trusli"
+						description=""
+						subDescription={[
+							{
+								skills: "JavaScript, HTML, CSS, Figma",
+								text: "Implemented the location's website on Webflow, building dynamic, reusable components and ensuring responsive performance across devices.",
+							},
+							{
+								skills: "Webflow",
+								text: "Published and managed weekly blog content on the location website to strengthen brand presence and increase visibility.",
+							},
+						]}
+					/>
+
+					<SectionTitle title="Educational Experience" />
+					<VerticalTimelineElement
+						startDate={new Date(2022, 7)}
+						endDate={new Date(2025, 5)}
+						title="Master of Science, Computer Science"
+						location="Georgia Institute of Technology"
+						description=""
+						subDescription={[]}
+					/>
+					<VerticalTimelineElement
+						startDate={new Date(2021, 7)}
+						endDate={new Date(2022, 11)}
+						title="Master of Science, Advanced Architecture Design"
+						location="Cornell University"
+						description=""
+						subDescription={[]}
+					/>
+					<VerticalTimelineElement
+						startDate={new Date(2015, 8)}
+						endDate={new Date(2020, 5)}
+						title="Bachelor of Architecture, Architecture Design"
+						location="Chonqgin University"
+						description=""
+						subDescription={[]}
+					/>
+
 					<SectionTitle title="My Projects" />
 					<Grid
 						container
