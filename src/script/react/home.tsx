@@ -662,7 +662,7 @@ export function HomePage() {
 							},
 							{
 								title: "My CV",
-								target: "https://drive.google.com/file/d/1259SnuYYv94AH7p  VorfhHCoMmHSKDGqD/view?usp=sharing",
+								target: "https://docs.google.com/document/d/1DzdmZPjZnARP_jzIv4-lGemy54I0fXgl/edit?usp=sharing&ouid=116342092718082797660&rtpof=true&sd=true",
 							},
 						];
 						let navItems = items.map((item) => {
@@ -875,7 +875,7 @@ export function HomePage() {
 					<VerticalTimelineElement
 						startDate={new Date(2022, 5)}
 						endDate={new Date(2022, 11)}
-						title="Web Developer + UI/UX Intern"
+						title="Web Developer"
 						location="Trusli"
 						description=""
 						subDescription={[
