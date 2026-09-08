@@ -100,9 +100,20 @@ function EducationRow({ edu, delay }: { edu: Education; delay: number }) {
 		<FadeIn delay={delay}>
 			<div className="edu-item">
 				<p className="about-edu-school">{edu.school}</p>
-				<p className="about-edu-detail">
-					{edu.degree} · {edu.date[0]} - {edu.date[1]}
+
+				<p className="about-edu-date">
+					{new Date(edu.date[0]).toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "long", // Options: 'long' (January), 'short' (Jan), or '2-digit' (01)
+					})}{" "}
+					-{" "}
+					{new Date(edu.date[1]).toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "long", // Options: 'long' (January), 'short' (Jan), or '2-digit' (01)
+					})}
 				</p>
+
+				<p className="about-edu-detail">{edu.degree}</p>
 				<p
 					className="about-edu-detail"
 					style={{ marginTop: "0.85rem" }}
@@ -114,11 +125,38 @@ function EducationRow({ edu, delay }: { edu: Education; delay: number }) {
 	);
 }
 
+function MyNav() {
+	return (
+		<nav className="nav">
+			<div className="nav-inner">
+				<a href="#" className="nav-logo">
+					Fiona Wang
+				</a>
+				<ul className="nav-links">
+					<li>
+						<a href="#experience">Experience</a>
+					</li>
+					<li>
+						<a href="#projects">Projects</a>
+					</li>
+					<li>
+						<a href="#about">About</a>
+					</li>
+					<li>
+						<a href="mailto:alex@example.com" className="nav-cta">
+							Get in touch
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	);
+}
+
 function MyFooter() {
 	return (
 		<>
 			<hr className="divider" />
-			{/* <feConvolveMatrix> */}
 			<div
 				style={{
 					width: "100%",
@@ -162,24 +200,18 @@ function MyFooter() {
 						</div>
 					</div>
 					<div className="footer-links">
-						<a
-							href="https://github.com"
-							target="_blank"
-							// rel="noreferrer"
-						>
+						<a href="https://github.com/YunqinWang" target="_blank">
 							GitHub
 						</a>
 						<a
 							href="https://www.linkedin.com/in/fiona-yunqin-wang-4343971a4/"
 							target="_blank"
-							// rel="noreferrer"
 						>
 							LinkedIn
 						</a>
 					</div>
 				</div>
 			</div>
-			{/* </feConvolveMatrix> */}
 		</>
 	);
 }
@@ -188,33 +220,7 @@ function MyFooter() {
 export default function Portfolio() {
 	return (
 		<>
-			{/* NAV */}
-			<nav className="nav">
-				<div className="nav-inner">
-					<a href="#" className="nav-logo">
-						Alex Kim
-					</a>
-					<ul className="nav-links">
-						<li>
-							<a href="#projects">Work</a>
-						</li>
-						<li>
-							<a href="#experience">Experience</a>
-						</li>
-						<li>
-							<a href="#about">About</a>
-						</li>
-						<li>
-							<a
-								href="mailto:alex@example.com"
-								className="nav-cta"
-							>
-								Get in touch
-							</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
+			<MyNav />
 
 			{/* HERO */}
 			<section className="hero">
@@ -313,43 +319,51 @@ export default function Portfolio() {
 
 			{/* ABOUT */}
 			<div className="section" id="about">
-				<div className="section-header">
-					<div>
-						<p className="section-eyebrow">Background</p>
-						<h2 className="section-title">About me</h2>
-					</div>
-				</div>
 				<div className="about-grid">
 					<FadeIn>
-						<blockquote className="about-quote">
-							"I believe the best interfaces get out of the way
-							and let people do their best work."
-						</blockquote>
-						<div className="about-edu">
-							<p className="about-edu-label">Education</p>
-
-							{portfolio_data.EDUCATIONS.map((e, i) => (
-								<EducationRow
-									key={e.school}
-									edu={e}
-									delay={i * 80}
-								/>
-							))}
+						<div className="section-header">
+							<div>
+								<p className="section-eyebrow">Background</p>
+								<h2 className="section-title">About me</h2>
+							</div>
 						</div>
+						<blockquote className="about-quote">
+							"I believe good software makes complex systems
+							easier to understand and work with."
+						</blockquote>
 					</FadeIn>
 					<FadeIn delay={100}>
 						<p className="about-body">
-							I'm drawn to the intersection of engineering and
-							design — where clean component architecture meets
-							thoughtful visual craft. I've worked across agencies
-							and product companies, building everything from
-							design systems to consumer mobile apps.
+							I'm drawn to the intersection of computer science,
+							engineering, and the built environment. My work in
+							the traffic engineering industry has given me
+							experience building web applications, GIS tools, and
+							data-driven systems that connect technology with the
+							physical world.
 						</p>
 						<p className="about-body">
-							Outside of work you'll find me contributing to
-							open-source accessibility tooling, exploring
-							generative art, and dialing in my sourdough starter.
+							I'm particularly interested in software development
+							and building thoughtful, reliable tools that make
+							complex systems easier to understand and use. With a
+							background in architecture and computer science, I
+							enjoy using software and data to solve complex,
+							real-world engineering problems.
 						</p>
+					</FadeIn>
+				</div>
+				<div className="about-grid about-edu">
+					<div>
+						<p className="about-edu-label">Education</p>
+						{portfolio_data.EDUCATIONS.map((e, i) => (
+							<EducationRow
+								key={e.school}
+								edu={e}
+								delay={i * 80}
+							/>
+						))}
+					</div>
+
+					<div>
 						<p className="skills-label">Core skills</p>
 						<div className="skills-grid">
 							{portfolio_data.SKILLS.map((s) => (
@@ -358,7 +372,7 @@ export default function Portfolio() {
 								</div>
 							))}
 						</div>
-					</FadeIn>
+					</div>
 				</div>
 			</div>
 
