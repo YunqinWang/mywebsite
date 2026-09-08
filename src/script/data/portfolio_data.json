@@ -1,0 +1,118 @@
+{
+	"PROJECTS": [
+		{
+			"id": "pulse",
+			"number": "01",
+			"year": "2024",
+			"name": "Pulse Dashboard",
+			"category": "Data Visualization",
+			"desc": "Real-time analytics dashboard for a SaaS platform. Custom chart components, live WebSocket data, and a fully responsive layout serving 20k+ monthly users.",
+			"tags": ["React", "TypeScript", "D3.js", "Tailwind"],
+			"image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85"
+		},
+		{
+			"id": "folio",
+			"number": "02",
+			"year": "2024",
+			"name": "Folio CMS",
+			"category": "Content Management",
+			"desc": "Headless CMS interface with drag-and-drop block editor, live preview, and multi-language support. Reduced content publishing time by 60%.",
+			"tags": ["Next.js", "Radix UI", "Framer Motion", "GraphQL"],
+			"image": "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=1400&q=85"
+		},
+		{
+			"id": "stride",
+			"number": "03",
+			"year": "2023",
+			"name": "Stride Mobile",
+			"category": "Mobile Application",
+			"desc": "Cross-platform fitness tracking app with animated workout flows, offline support, and custom SVG data visualizations. 4.8★ on App Store.",
+			"tags": ["React Native", "Reanimated", "SQLite", "Expo"],
+			"image": "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1400&q=85"
+		},
+		{
+			"id": "beacon",
+			"number": "04",
+			"year": "2023",
+			"name": "Beacon Design System",
+			"category": "Design Systems",
+			"desc": "End-to-end component library for a fintech company. 80+ accessible components, Storybook integration, and auto-generated prop docs.",
+			"tags": ["React", "Storybook", "CSS Modules", "WCAG AA"],
+			"image": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1400&q=85"
+		},
+		{
+			"id": "vera",
+			"number": "05",
+			"year": "2022",
+			"name": "Vera E-Commerce",
+			"category": "E-Commerce",
+			"desc": "Full storefront redesign for a fashion brand — 3D product viewer, optimised image pipeline, and a custom checkout flow that lifted conversion by 22%.",
+			"tags": ["Next.js", "Three.js", "Shopify API", "GSAP"],
+			"image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=85"
+		},
+		{
+			"id": "atlas",
+			"number": "06",
+			"year": "2022",
+			"name": "Atlas Maps",
+			"category": "Geo-Visualization",
+			"desc": "Geo-visualisation tool for urban planners. Custom WebGL tile renderer, cluster analysis overlays, and an accessible data export panel.",
+			"tags": ["Vue 3", "MapLibre GL", "WebGL", "Pinia"],
+			"image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1400&q=85"
+		}
+	],
+
+	"EXPERIENCES": [
+		{
+			"period": "2022 — Present",
+			"company": "Luminary Labs",
+			"role": "Senior Frontend Engineer",
+			"desc": "Leading frontend architecture for a suite of B2B SaaS products. Own the design system, conduct technical interviews, and mentor a team of three junior engineers. Shipped Pulse Dashboard and Folio CMS end-to-end.",
+			"skills": ["React", "TypeScript", "Next.js", "Figma", "GraphQL"]
+		},
+		{
+			"period": "2020 — 2022",
+			"company": "Verve Studio",
+			"role": "Frontend Developer",
+			"desc": "Delivered pixel-perfect UI for agency clients across fintech, fashion, and health verticals. Introduced component-driven development practices that cut delivery time by 35%.",
+			"skills": ["Vue 3", "JavaScript", "GSAP", "SCSS", "Storybook"]
+		},
+		{
+			"period": "2019 — 2020",
+			"company": "Neon Digital",
+			"role": "Junior Frontend Developer",
+			"desc": "Built responsive marketing sites and interactive landing pages. Collaborated with designers in Figma and maintained legacy jQuery codebases while migrating to modern React toolchains.",
+			"skills": ["React", "JavaScript", "HTML/CSS", "jQuery"]
+		}
+	],
+	"EDUCATIONS": [
+		{
+			"date": ["2023-08-20", "2025-05-30"],
+			"degree": "Master Science of Computer Science",
+			"school": "Georgia Institute of Technology",
+			"desc": ""
+		},
+		{
+			"date": ["2021-08-20", "2022-12-31"],
+			"degree": "Master Science of Advanced Architecture Design",
+			"school": "Cornell University",
+			"desc": ""
+		},
+		{
+			"date": ["2015-09-01", "2020-06-30"],
+			"degree": "Bachelor of Architecture",
+			"school": "Chongqing University",
+			"desc": ""
+		}
+	],
+	"SKILLS": [
+		"React",
+		"TypeScript",
+		"JavaScript",
+		"Python",
+		"GraphQL",
+		"Next.js",
+		"Pandas / Geopandas",
+		"Azure"
+	]
+}

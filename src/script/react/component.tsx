@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import * as d3 from "d3";
 import React from "react";
 import { Icon_github, Icon_gmail, Icon_linkedin } from "../util/icon_loader";
+import { useState, useEffect, useRef } from "react";
 
 export function Tag({ title, color }: { title: string; color: string }) {
 	return (
@@ -167,5 +168,42 @@ export function SectionTitle({ title }: { title: string }) {
 		>
 			{title}
 		</Typography>
+	);
+}
+
+export function FadeIn({
+	children,
+	delay = 0,
+}: {
+	children: React.ReactNode;
+	delay?: number;
+}) {
+	const ref = useRef<HTMLDivElement>(null);
+	const [visible, setVisible] = useState(false);
+
+	useEffect(() => {
+		const el = ref.current;
+		if (!el) return;
+		const obs = new IntersectionObserver(
+			([e]) => {
+				if (e.isIntersecting) {
+					setVisible(true);
+					obs.disconnect();
+				}
+			},
+			{ threshold: 0.1 },
+		);
+		obs.observe(el);
+		return () => obs.disconnect();
+	}, []);
+
+	return (
+		<div
+			ref={ref}
+			className={`fade-in${visible ? " visible" : ""}`}
+			style={{ transitionDelay: `${delay}ms` }}
+		>
+			{children}
+		</div>
 	);
 }
