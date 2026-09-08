@@ -17,8 +17,10 @@ interface Project {
 interface Experience {
 	period: string;
 	company: string;
-	role: string;
-	desc: string;
+	details: {
+		role: string;
+		desc: string;
+	}[];
 	skills: string[];
 }
 
@@ -79,9 +81,15 @@ function ExperienceRow({ exp, delay }: { exp: Experience; delay: number }) {
 					<div className="exp-period">{exp.period}</div>
 					<div className="exp-company">{exp.company}</div>
 				</div>
-				<div>
-					<div className="exp-role">{exp.role}</div>
-					<p className="exp-desc">{exp.desc}</p>
+				<div className="exp-detail">
+					{exp.details.map((d, i) => {
+						return (
+							<div key={i}>
+								<div className="exp-role">{d.role}</div>
+								<p className="exp-desc">{d.desc}</p>
+							</div>
+						);
+					})}
 					<div className="exp-skills">
 						{exp.skills.map((s) => (
 							<span key={s} className="exp-skill">
@@ -278,24 +286,6 @@ export default function Portfolio() {
 
 			<hr className="divider" />
 
-			{/* PROJECTS */}
-			<div className="section" id="projects">
-				<div className="section-header">
-					<div>
-						<p className="section-eyebrow">Selected work</p>
-						<h2 className="section-title">Projects</h2>
-					</div>
-					<span className="section-count">
-						{portfolio_data.PROJECTS.length} projects
-					</span>
-				</div>
-				<div className="projects-list">
-					{portfolio_data.PROJECTS.map((p, i) => (
-						<ProjectBanner key={p.id} project={p} index={i} />
-					))}
-				</div>
-			</div>
-
 			{/* EXPERIENCE */}
 			<div className="exp-bg" id="experience">
 				<div className="section">
@@ -314,6 +304,24 @@ export default function Portfolio() {
 							/>
 						))}
 					</div>
+				</div>
+			</div>
+
+			{/* PROJECTS */}
+			<div className="section" id="projects">
+				<div className="section-header">
+					<div>
+						<p className="section-eyebrow">Selected work</p>
+						<h2 className="section-title">Projects</h2>
+					</div>
+					<span className="section-count">
+						{portfolio_data.PROJECTS.length} projects
+					</span>
+				</div>
+				<div className="projects-list">
+					{portfolio_data.PROJECTS.map((p, i) => (
+						<ProjectBanner key={p.id} project={p} index={i} />
+					))}
 				</div>
 			</div>
 

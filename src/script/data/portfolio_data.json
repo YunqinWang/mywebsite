@@ -64,25 +64,50 @@
 
 	"EXPERIENCES": [
 		{
-			"period": "2022 — Present",
-			"company": "Luminary Labs",
-			"role": "Senior Frontend Engineer",
-			"desc": "Leading frontend architecture for a suite of B2B SaaS products. Own the design system, conduct technical interviews, and mentor a team of three junior engineers. Shipped Pulse Dashboard and Folio CMS end-to-end.",
-			"skills": ["React", "TypeScript", "Next.js", "Figma", "GraphQL"]
+			"period": "2023 — Present",
+			"company": "Precision Systems Inc.",
+			"skills": [
+				"React",
+				"TypeScript",
+				"JavaScript",
+				"Python",
+				"C#",
+				"SQL",
+				"Azure",
+				"GIS / ArcGIS"
+			],
+			"details": [
+				{
+					"role": "Software Engineer — Asset Management",
+					"desc": "I develop and lead software projects for real-world engineering applications, working across frontend development, backend systems, GIS, and data. I work directly with clients to understand requirements, make technical decisions, and take projects from development through delivery."
+				},
+				{
+					"role": "Frontend Engineer",
+					"desc": "I developed web applications and data-driven tools for transportation and infrastructure projects, focusing on frontend development, GIS, and data visualization. I collaborated with engineers and project teams to turn complex infrastructure data into practical, user-friendly applications."
+				}
+			]
 		},
 		{
-			"period": "2020 — 2022",
-			"company": "Verve Studio",
-			"role": "Frontend Developer",
-			"desc": "Delivered pixel-perfect UI for agency clients across fintech, fashion, and health verticals. Introduced component-driven development practices that cut delivery time by 35%.",
-			"skills": ["Vue 3", "JavaScript", "GSAP", "SCSS", "Storybook"]
+			"period": "2022",
+			"company": "Charlie Media LLC",
+			"skills": ["JavaScript", "jQuery", "AWS", "HubSpot", "Figma"],
+			"details": [
+				{
+					"role": "Web Developer Intern",
+					"desc": "I designed and implemented the company's website using HubSpot and developed a chatbot using AWS. I also built several supporting functions for the company's online services, gaining hands-on experience across web development, cloud services, and backend functionality."
+				}
+			]
 		},
 		{
-			"period": "2019 — 2020",
-			"company": "Neon Digital",
-			"role": "Junior Frontend Developer",
-			"desc": "Built responsive marketing sites and interactive landing pages. Collaborated with designers in Figma and maintained legacy jQuery codebases while migrating to modern React toolchains.",
-			"skills": ["React", "JavaScript", "HTML/CSS", "jQuery"]
+			"period": "2022",
+			"company": "Cornell University",
+			"skills": ["Drupal", "HTML/CSS"],
+			"details": [
+				{
+					"role": "Graduate Assistant",
+					"desc": "I developed and maintained websites for two professors using Drupal. I translated design and content requirements into functional web experiences, working directly with faculty to structure content, implement site features, and maintain the sites over time."
+				}
+			]
 		}
 	],
 	"EDUCATIONS": [
@@ -111,8 +136,10 @@
 		"JavaScript",
 		"Python",
 		"GraphQL",
+		"SQL",
 		"Next.js",
 		"Pandas / Geopandas",
-		"Azure"
+		"Azure",
+		"ArcGIS / QGIS"
 	]
 }

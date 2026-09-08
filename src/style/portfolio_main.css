@@ -441,12 +441,27 @@ body {
 	color: var(--text);
 	letter-spacing: -0.01em;
 }
-
+.exp-detail {
+	border-left: 1px solid var(--border);
+	padding-left: 1.5rem;
+}
+.exp-role::before {
+	content: "";
+	position: absolute;
+	left: -1.5rem;
+	top: 50%;
+	width: 5px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--border);
+	transform: translate(-50%, -50%);
+}
 .exp-role {
 	font-size: 1rem;
 	font-weight: 500;
 	color: var(--text);
 	margin-bottom: 0.65rem;
+	position: relative;
 }
 .exp-desc {
 	font-size: 0.88rem;
